@@ -9,6 +9,7 @@ import PeopleDashboard from '../../features/user/PeopleDashboard/PeopleDashboard
 import UserDetailedPage from '../../features/user/UserDetailed/UserDetailedPage';
 import SettingsDashboard from '../../features/user/Settings/SettingsDashboard';
 import EventForm from '../../features/event/EventForm/EventForm';
+import ModalManager from '../../features/modals/ModalManager';
 
 function App() {
   // if (this.props !== '') {
@@ -16,6 +17,7 @@ function App() {
   // }
   return (
     <Fragment>
+      <ModalManager />
       <Route exact path="/" component={HomePage} />
       <Route
         path="/(.+)"
