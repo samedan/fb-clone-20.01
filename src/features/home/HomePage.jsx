@@ -7,6 +7,7 @@ import {
   Button,
   Icon
 } from 'semantic-ui-react';
+import Timeline from '../../app/layout/Timeline';
 
 const HomePage = ({ history }) => {
   return (
@@ -26,6 +27,7 @@ const HomePage = ({ history }) => {
             Get started
             <Icon name="right arrow" inverted />
           </Button>
+          <Timeline />
         </Container>
       </Segment>
     </Fragment>
