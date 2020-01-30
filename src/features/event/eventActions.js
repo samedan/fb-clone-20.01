@@ -10,21 +10,38 @@ import {
   asyncActionStart,
   asyncActionError
 } from '../async/asyncActions';
+import { toastr } from 'react-redux-toastr';
 
 export const createEvent = event => {
-  return {
-    type: CREATE_EVENT,
-    payload: {
-      event // payload.event
+  return async dispatch => {
+    try {
+      dispatch({
+        type: CREATE_EVENT,
+        payload: {
+          event // payload.event
+        }
+      });
+      toastr.success('Success!', 'Event has been created');
+    } catch (error) {
+      console.log(error);
+      toastr.success('Oops', 'Error creating the event');
     }
   };
 };
 
 export const updateEvent = event => {
-  return {
-    type: UPDATE_EVENT,
-    payload: {
-      event // payload.event
+  return async dispatch => {
+    try {
+      dispatch({
+        type: UPDATE_EVENT,
+        payload: {
+          event // payload.event
+        }
+      });
+      toastr.success('Success!', 'Event has been updated');
+    } catch (error) {
+      console.log(error);
+      toastr.success('Oops', 'Error updating the event');
     }
   };
 };
