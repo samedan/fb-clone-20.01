@@ -3,7 +3,8 @@ import { Grid, GridColumn, Button } from 'semantic-ui-react';
 import EventList from '../EventList/EventList';
 import { connect } from 'react-redux';
 import { createEvent, updateEvent, deleteEvent } from '../eventActions';
-import { openModal } from '../../modals/modalActions';
+import { openModal, openModalAsync } from '../../modals/modalActions';
+import LoadingComponent from '../../../app/layout/LoadingComponent';
 
 class EventDashboard extends Component {
   handleDeleteEvent = id => {
@@ -11,14 +12,25 @@ class EventDashboard extends Component {
   };
 
   render() {
-    const { events, openModal } = this.props;
+    const { events, openModalAsync, loading } = this.props;
+    if (loading) {
+      return <LoadingComponent inverted={loading} />;
+    }
     return (
       <Grid>
         <GridColumn width={10}>
           <Button
-            onClick={() => openModal('TestModal', { data: 42 })}
+            name="increment"
+            onClick={e => openModalAsync(e.target.name, { data: 42 })}
             color="teal"
-            content="Open Modal"
+            content="Open Modal Async"
+            loading={loading}
+          />
+          <Button
+            name="decrement"
+            onClick={e => openModalAsync(e.target.name, { data: 42 })}
+            color="teal"
+            content="Decrement Async"
           />
           <EventList
             events={events}
@@ -35,12 +47,14 @@ class EventDashboard extends Component {
 }
 
 const mapStateToProps = state => ({
-  events: state.events
+  events: state.events,
+  loading: state.async.loading
 });
 
 export default connect(mapStateToProps, {
   createEvent,
   updateEvent,
   deleteEvent,
-  openModal
+  openModal,
+  openModalAsync
 })(EventDashboard);
